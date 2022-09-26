@@ -76,4 +76,4 @@ if __name__ == "__main__":
         for cat_num in ml_catalog_numbers[0:100]:
             get_image(cat_num, output_dir)
         #resize images
-        resize(output_dir, os.listdir(output_dir), 100)
+        resize(output_dir+"/", os.listdir(output_dir), 100)
