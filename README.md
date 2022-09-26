@@ -11,3 +11,4 @@ Have CSV files for the following birds:
 TODO:
 - [ ] Label 100 images each using the following tool: https://github.com/Cartucho/OpenLabeling
 - [ ] Sign into my Macaulay Library account so my CSVs have more than 30 rows 
+- [ ] Use this to fine-tune YOLOv7 model
