@@ -8,5 +8,6 @@ Have CSV files for the following birds:
 - [x] Kaka 
 - [x] Yellow-eyed Penguin
 
-Label 100 images each using the following tool:
-https://github.com/Cartucho/OpenLabeling
+TODO:
+- [ ] Label 100 images each using the following tool: https://github.com/Cartucho/OpenLabeling
+- [ ] Sign into my Macaulay Library account so my CSVs have more than 30 rows 
