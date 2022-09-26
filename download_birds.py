@@ -14,6 +14,7 @@ import requests
 import sys
 import os
 import os.path
+from PIL import Image
 
 csv_to_dir = [
     ('kiwi.csv', '0_kiwi'),
@@ -54,6 +55,19 @@ def load_ml_catalog_numbers(search_csv):
     sorted_by_rating_desc = sorted(by_recordist.values(), key=lambda pair: pair[1], reverse=True)
     return [ml_catalog_number for (ml_catalog_number, rating) in sorted_by_rating_desc if rating > 0.0]
 
+# RESIZE IMAGES
+# https://stackoverflow.com/questions/21517879/python-pil-resize-all-images-in-a-folder
+def resize(path,dirs,SZ):
+    for item in dirs:
+        print(item)
+        print(path+item)
+        if os.path.isfile(path+item):
+            print("resizing")
+            im = Image.open(path+item)
+            f, e = os.path.splitext(path+item)
+            imResize = im.resize((SZ,SZ), Image.ANTIALIAS)
+            imResize.save(f, 'JPEG', quality=99)
+
 if __name__ == "__main__":
     for (search_csv, output_dir) in csv_to_dir:
         ml_catalog_numbers = load_ml_catalog_numbers(search_csv)
@@ -61,3 +75,5 @@ if __name__ == "__main__":
         # Take the first 100 images.
         for cat_num in ml_catalog_numbers[0:100]:
             get_image(cat_num, output_dir)
+        #resize images
+        resize(output_dir, os.listdir(output_dir), 100)
