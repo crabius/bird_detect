@@ -1,5 +1,5 @@
 train: ./yolov7/train
-#test: (Complete path to dataset test folder) 
+test: ./yolov7/test
 
 #Classes
 nc: 5 # replace according to your number of classes
