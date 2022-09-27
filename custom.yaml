@@ -1,6 +1,6 @@
-train: ./yolov7/train
-val: ./yolov7/val
-test: ./yolov7/test
+train: ./train
+val: ./val
+test: ./test
 
 #Classes
 nc: 5 # replace according to your number of classes
