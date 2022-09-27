@@ -66,7 +66,7 @@ def resize(path,dirs,SZ):
             im = Image.open(path+item)
             f, e = os.path.splitext(path+item)
             imResize = im.resize((SZ,SZ), Image.ANTIALIAS)
-            imResize.save(f, 'JPEG', quality=99)
+            imResize.save(f+".jpg", 'JPEG', quality=99)
 
 if __name__ == "__main__":
     for (search_csv, output_dir) in csv_to_dir:
