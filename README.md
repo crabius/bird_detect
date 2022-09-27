@@ -9,6 +9,4 @@ Have CSV files for the following birds:
 - [x] Yellow-eyed Penguin
 
 TODO:
-- [ ] Label 100 images each using the following tool: https://github.com/Cartucho/OpenLabeling
-- [ ] Sign into my Macaulay Library account so my CSVs have more than 30 rows 
-- [ ] Use this to fine-tune YOLOv7 model
+- [ ] Edit download script to split into train/val/test input and output folders
