@@ -16,6 +16,9 @@ import os
 import os.path
 from PIL import Image
 
+# every class needs to be saved in input/{bird_name}
+# for the train/val/test splitting to work.
+
 csv_to_dir = [
     ('10k_kea.csv', 'input/kea'),
 ]
