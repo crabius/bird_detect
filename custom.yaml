@@ -1,4 +1,5 @@
 train: ./yolov7/train
+val: ./yolov7/val
 test: ./yolov7/test
 
 #Classes
