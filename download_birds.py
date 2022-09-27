@@ -8,7 +8,7 @@ Allows scraping thumbnails from the Macaulay Library based on a CSV from a searc
 For example, here is a search for images of Mourning Dove:
 https://search.macaulaylibrary.org/catalog?mediaType=photo&unconfirmed=incl&captive=incl&taxonCode=moudov&view=list
 """
-
+import splitfolders
 import csv
 import requests
 import sys
@@ -17,7 +17,7 @@ import os.path
 from PIL import Image
 
 csv_to_dir = [
-    ('kiwi.csv', '0_kiwi'),
+    ('10k_kea.csv', 'input/kea'),
 ]
 
 def get_image(ml_catalog_number, output_dir):
@@ -72,8 +72,17 @@ if __name__ == "__main__":
     for (search_csv, output_dir) in csv_to_dir:
         ml_catalog_numbers = load_ml_catalog_numbers(search_csv)
         os.makedirs(output_dir, exist_ok=True)
-        # Take the first 100 images.
-        for cat_num in ml_catalog_numbers[0:100]:
+        # Take the first 500 images.
+        for cat_num in ml_catalog_numbers[0:10]:
             get_image(cat_num, output_dir)
         #resize images
-        resize(output_dir+"/", os.listdir(output_dir), 100)
+        print(output_dir)
+        print(os.listdir(output_dir))
+        resize(output_dir+"/", os.listdir(output_dir), 400)
+        # split into train, val, test folders
+        splitfolders.ratio(
+            "./input",
+            output="output",
+            seed=1337,
+            ratio=(0.8,0.1,0.1)
+        )
