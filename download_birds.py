@@ -16,11 +16,8 @@ import os
 import os.path
 from PIL import Image
 
-# every class needs to be saved in input/{bird_name}
-# for the train/val/test splitting to work.
-
 csv_to_dir = [
-    ('10k_kea.csv', 'input/kea'),
+    ('10k_kea.csv', './input/kea'),
 ]
 
 def get_image(ml_catalog_number, output_dir):
@@ -56,36 +53,67 @@ def load_ml_catalog_numbers(search_csv):
             row_num += 1
 
     sorted_by_rating_desc = sorted(by_recordist.values(), key=lambda pair: pair[1], reverse=True)
-    return [ml_catalog_number for (ml_catalog_number, rating) in sorted_by_rating_desc if rating > 0.0]
+    return [ml_catalog_number for (ml_catalog_number, rating) in sorted_by_rating_desc if 1==1]#rating > 0.0]
 
 # RESIZE IMAGES
 # https://stackoverflow.com/questions/21517879/python-pil-resize-all-images-in-a-folder
 def resize(path,dirs,SZ):
     for item in dirs:
-        print(item)
-        print(path+item)
-        if os.path.isfile(path+item):
-            print("resizing")
-            im = Image.open(path+item)
-            f, e = os.path.splitext(path+item)
-            imResize = im.resize((SZ,SZ), Image.ANTIALIAS)
-            imResize.save(f+".jpg", 'JPEG', quality=99)
+        try:
+            print(item)
+            print(path+item)
+            if os.path.isfile(path+item):
+                print("resizing")
+                im = Image.open(path+item)
+                # convert image to RGB
+                im = im.convert('RGB')
+                f, e = os.path.splitext(path+item)
+                imResize = im.resize((SZ,SZ), Image.ANTIALIAS)
+                imResize.save(f+".jpg", 'JPEG', quality=99)
+                print("saving ",f)
+        except:
+            print("ERROR with item ",item)
+
+def dupes():
+    """
+    Just double checking if train test val have any overlapping files
+    """
+    folds = ["./train/kea","./test/kea","./val/kea"]
+    files=[]
+    for folder in folds:
+        files.append(os.listdir(folder))
+    res = []
+    for folder in files:
+        for file in folder:
+            res.append(file)
+    #check if any files appear twice
+    import collections
+    print("duplicates: ",
+        [item for item,count in collections.Counter(res).items() if count > 1]
+    )
 
 if __name__ == "__main__":
+    num = input("Enter how many of each bird you want: ")
+    SZ = input("Enter how big you want the (square) images to be: ")
     for (search_csv, output_dir) in csv_to_dir:
+        print(output_dir)
         ml_catalog_numbers = load_ml_catalog_numbers(search_csv)
         os.makedirs(output_dir, exist_ok=True)
-        # Take the first 500 images.
-        for cat_num in ml_catalog_numbers[0:10]:
+        # Take the first *num* images.
+        count=0
+        for cat_num in ml_catalog_numbers[0:int(num)]:
+            count += 1
+            print("image {}/{}".format(count,num))
             get_image(cat_num, output_dir)
-        #resize images
+        #resize images to [SZ,SZ]
         print(output_dir)
         print(os.listdir(output_dir))
-        resize(output_dir+"/", os.listdir(output_dir), 400)
+        resize(output_dir+"/", os.listdir(output_dir), int(SZ))
         # split into train, val, test folders
         splitfolders.ratio(
             "./input",
-            output="output",
+            output="./",
             seed=1337,
-            ratio=(0.8,0.1,0.1)
+            ratio=(0.9,0.05,0.05)
         )
+    dupes()
