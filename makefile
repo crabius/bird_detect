@@ -1,15 +1,9 @@
 all:
 	#run to download
-	rm -rf ./input ./train ./test ./val
-	mkdir ./input ./input/kea
+	#array of bird files
+        # ./input/bird_class
 	python3 download_birds.py
-	mv ./train/kea/* ./train/
-	rmdir ./train/kea
-	mv ./test/kea/* ./test/
-	rmdir ./test/kea
-	mv ./val/kea/* ./val/
-	rmdir ./val/kea
-	tree train test val
+	bash move_dirs.sh
 move:
 	#move to the labelling directory
 	rm -rf ../OpenLabeling-master/main/train
