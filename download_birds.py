@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
+
 """
-Taken from 
+Taken and modified from original source:
 https://github.com/ankurdave/macaulay-bird-species-pittsburgh/blob/master/scrape-macaulay-search-csv.py
 """
+
 """
 Allows scraping thumbnails from the Macaulay Library based on a CSV from a search.
 For example, here is a search for images of Mourning Dove:
 https://search.macaulaylibrary.org/catalog?mediaType=photo&unconfirmed=incl&captive=incl&taxonCode=moudov&view=list
 """
-import splitfolders
+
 import csv
 import requests
 import sys
@@ -75,25 +77,7 @@ def resize(path,dirs,SZ):
                 print("saving ",f)
         except:
             print("ERROR with item ",item)
-
-def dupes():
-    """
-    Just double checking if train test val have any overlapping files
-    """
-    folds = ["./train/kea","./test/kea","./val/kea"]
-    files=[]
-    for folder in folds:
-        files.append(os.listdir(folder))
-    res = []
-    for folder in files:
-        for file in folder:
-            res.append(file)
-    #check if any files appear twice
-    import collections
-    print("duplicates: ",
-        [item for item,count in collections.Counter(res).items() if count > 1]
-    )
-
+            
 if __name__ == "__main__":
     num = input("Enter how many of each bird you want: ")
     SZ = input("Enter how big you want the (square) images to be: ")
@@ -111,11 +95,3 @@ if __name__ == "__main__":
         print(output_dir)
         print(os.listdir(output_dir))
         resize(output_dir+"/", os.listdir(output_dir), int(SZ))
-        # split into train, val, test folders
-        splitfolders.ratio(
-            "./input",
-            output="./",
-            seed=1337,
-            ratio=(0.9,0.05,0.05)
-        )
-    dupes()

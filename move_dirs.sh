@@ -2,7 +2,7 @@ mkdir train || echo "train exists"
 mkdir test || echo "test exists."
 mkdir val || echo "val exists."
 
-for i in kea takahe tui ;
+for i in kea takahe tui kea_aug takahe_aug tui_aug ;
 do 
     mv ./train/$i/* ./train/
     mv ./test/$i/* ./test/
