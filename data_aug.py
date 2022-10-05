@@ -1,19 +1,7 @@
-"""
-Perform data augmentation on images files in
-FROM, the input folder and output the images in 
-TO, the output folder.
-Doubles amount of data by appling a couple of transformations
-"""
-
 from PIL import Image
 import numpy as np
 import albumentations as A
-import matplotlib.pyplot as plt
 import os
-
-#folders we are reading from and writing to
-FROM='./images'
-TO='./target'
 
 # Declare an augmentation pipeline
 transform = A.Compose([
@@ -27,13 +15,31 @@ transform = A.Compose([
     A.ColorJitter(p=1.0)
 ])
 
-#enumerate over images
-for i,img in enumerate(os.listdir(FROM)):
-    name = f'{FROM}/{img}'
-    image = Image.open(name)
-    image = np.asarray(image)
-    #transform image
-    transformed = transform(image=image)
-    image = transformed["image"]
-    image = Image.fromarray(image)
-    image.save(f'{TO}/{i}.png')
+def data_aug(name,FROM,TO):
+    """
+    Perform data augmentation on images files in
+    FROM, the input folder and output the images in 
+    TO, the output folder.
+    in format name_i.png where i is an int
+    """
+    
+    #items already in augmented dir
+    target_dir = os.listdir(TO)
+    
+    #enumerate over images
+    for i,img in enumerate(os.listdir(FROM)):
+        name = f'{FROM}/{img}'
+        image = Image.open(name)
+        image = np.asarray(image)
+        #transform image
+        transformed = transform(image=image)
+        image = transformed["image"]
+        image = Image.fromarray(image)
+        if f'{i}.png' not in target_dir:
+        	#avoid saving duplicates
+        	image.save(f'{TO}/{bird}_{i}.png')
+
+if __name__=="__main__":
+    #lets run data augmentation on all our birds
+    for bird in ['kea','takahe','tui']:
+        data_aug(bird,f'./input/{bird}',f'./train')

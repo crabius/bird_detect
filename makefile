@@ -1,9 +1,10 @@
 all:
 	#run to download
 	#array of bird files
-        # ./input/bird_class
+	# ./input/bird_class
 	python3 download_birds.py
 	bash move_dirs.sh
+	python3 data_aug.py
 move:
 	#move to the labelling directory
 	rm -rf ../OpenLabeling-master/main/train
