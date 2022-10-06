@@ -1,6 +1,6 @@
-train: ./yolov7/train
-test: ./yolov7/test
-val: ./yolov7/val
+train: ./train
+test: ./test
+val: ./val
 
 #Classes
 nc: 3
