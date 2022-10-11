@@ -57,7 +57,7 @@ def load_ml_catalog_numbers(search_csv):
             row_num += 1
 
     sorted_by_rating_desc = sorted(by_recordist.values(), key=lambda pair: pair[1], reverse=True)
-    return [ml_catalog_number for (ml_catalog_number, rating) in sorted_by_rating_desc if rating > 0.0]
+    return [ml_catalog_number for (ml_catalog_number, rating) in sorted_by_rating_desc if 0==0]#if rating > 0.0]
 
 # RESIZE IMAGES
 # https://stackoverflow.com/questions/21517879/python-pil-resize-all-images-in-a-folder
