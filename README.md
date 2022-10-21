@@ -1,6 +1,8 @@
 # bird_detect
 Detect bird species in photos using YOLOv3
 
+https://user-images.githubusercontent.com/95381252/197306200-b7d074d6-a21c-46dc-a082-eadf80ba2b06.mp4
+
 # Downloading, augmenting and labelling data
 
 - First download OpenLabelling
