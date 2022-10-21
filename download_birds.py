@@ -18,6 +18,14 @@ import os
 import os.path
 from PIL import Image
 
+"""
+NOTE:
+you need to put your csvs and the directory you 
+want them to be put into 
+(should be ./input/bird_name) if you 
+are using my data pipeline scripts
+"""
+
 csv_to_dir = [
     ('kea.csv', './input/kea'),
     ('takahe.csv', './input/takahe'),
