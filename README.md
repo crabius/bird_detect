@@ -7,7 +7,7 @@ Detect bird species in photos using YOLOv3
 ```bash
 git clone https://github.com/Cartucho/OpenLabeling
 ```
-- Move the files from /label/ into the OpenLabeling repo
+- Move the files from /label/ into the OpenLabeling repo /OpenLabeling/main
 - Now get the csv of birds you want to scrape and download from the macaulay library.
 - I already have some in the repository. 
 - You have to make an account to download big csv.
