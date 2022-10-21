@@ -44,3 +44,10 @@ make v
 - Run all in the ipynb. It should take 2+ hours to train(with premium) more with free colab
 - Note: colab will need permission to grab the data from your drive
 - You can see the saved results on video and image tests in your drive
+
+Note: 
+The results of the model is quite dependent on the hyperparameters conf_thresh (confidence bounding box threshold).
+Setting a lower confidence threshold makes the model more sensitive and leads to false positives. 
+Conversely, setting a high confidence threshold makes the model insensitive and leads to false negatives.
+To get good results before deploying,you should tweak this hyperparameter.
+The best value will depend on the type of data you input. When the model runs it outputs a ROC curve that shows you false positive/ negative rates at different confidence thresholds. You can use the optimal value as the default if you don't feel like tweaking it for different scenarios.
